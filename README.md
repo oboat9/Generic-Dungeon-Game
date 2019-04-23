@@ -18,8 +18,9 @@ A Generic Dungeon Game Made For Computer Science 10
  - Original Sound Design
  - Original Sprites
  - Enemies
- ### Planned Features (Deadline Dependant)
+ - Window Gets Larger Every Time You Beat A Level
  
+ ### Planned Features (Deadline Dependant)
   - *Projectiles / Weapons*
   - *Basic Lighting System (Black shadow around a certain radius of the player to increase difficulty and reduce pre-planning ability)*
 	
