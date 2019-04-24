@@ -35,9 +35,12 @@ A Generic Dungeon Game Made For Computer Science 10
  
 ###### Sprites
  - [ ] Design Character
- - [ ] Design Enemies
- - [ ] Design Boss
+ - [ ] Design Regular Enemy
+ - [ ] Design Enemy With Projectile
+ - [ ] Design Mid-Boss
+ - [ ] Design Final-Boss
  - [ ] Design "Key"
+ 
 ###### Sound
  - [ ] Design Sound Effects
  - [ ] Design Music
