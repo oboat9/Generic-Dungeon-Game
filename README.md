@@ -24,7 +24,7 @@ A Generic Dungeon Game Made For Computer Science 10
   - *Basic Lighting System (Black shadow around a certain radius of the player to increase difficulty and reduce pre-planning ability) (Not on boss levels)*
 	
 ## Tasks
-#### Design & Planning
+#### Design & *Planning*
 ###### Levels
  - [x] Design Level 1
  
@@ -32,15 +32,16 @@ A Generic Dungeon Game Made For Computer Science 10
  
  - [x] Design Level 3
  
- - [ ] Design Level 4
+ - [x] Design Level 4
  
- - [ ] Design Level 5
+ - [x] Design Level 5
  
  - [ ] Design Level 6
  
 ###### Sprites
  - [ ] Design Character
  - [ ] Design Enemies
+ - [ ] Design Boss
  - [ ] Design "Key"
 ###### Sound
  - [ ] Design Sound Effects
