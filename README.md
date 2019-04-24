@@ -27,15 +27,10 @@ A Generic Dungeon Game Made For Computer Science 10
 #### Design & *Planning*
 ###### Levels
  - [x] Design Level 1
- 
  - [x] Design Level 2
- 
  - [x] Design Level 3
- 
  - [x] Design Level 4
- 
  - [x] Design Level 5
- 
  - [ ] Design Level 6
  
 ###### Sprites
