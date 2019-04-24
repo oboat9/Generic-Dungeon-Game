@@ -18,21 +18,26 @@ A Generic Dungeon Game Made For Computer Science 10
  - Original Sound Design
  - Original Sprites
  - Enemies
- - Window Gets Larger Every Time You Beat A Level
  
  ### Planned Features (Deadline Dependant)
   - *Projectiles / Weapons*
-  - *Basic Lighting System (Black shadow around a certain radius of the player to increase difficulty and reduce pre-planning ability)*
+  - *Basic Lighting System (Black shadow around a certain radius of the player to increase difficulty and reduce pre-planning ability) (Not on boss levels)*
 	
 ## Tasks
 #### Design & Planning
 ###### Levels
  - [x] Design Level 1
- - [ ] Design Level 2
- - [ ] Design Level 3
+ 
+ - [x] Design Level 2
+ 
+ - [x] Design Level 3
+ 
  - [ ] Design Level 4
+ 
  - [ ] Design Level 5
+ 
  - [ ] Design Level 6
+ 
 ###### Sprites
  - [ ] Design Character
  - [ ] Design Enemies
