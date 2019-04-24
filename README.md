@@ -7,7 +7,7 @@ A Generic Dungeon Game Made For Computer Science 10
 ## Project Criteria
  - 6 Levels
  - Key and exit for each level
- - Original sprites
+ - Original Sprites
 
  ## Game Description
  This is a game that should just be a fairly generic dungeon escape game.
@@ -18,10 +18,10 @@ A Generic Dungeon Game Made For Computer Science 10
  - Original Sound Design
  - Original Sprites
  - Enemies
- 
+ - Projectiles / Weapons
  ### Planned Features (Deadline Dependant)
-  - *Projectiles / Weapons*
-  - *Basic Lighting System (Black shadow around a certain radius of the player to increase difficulty and reduce pre-planning ability) (Not on boss levels)*
+  - *Basic Lighting System (Black shadow around a certain radius of the player to increase difficulty) (Not on boss levels)*
+	
 	
 ## Tasks
 #### Design & *Planning*
@@ -31,7 +31,7 @@ A Generic Dungeon Game Made For Computer Science 10
  - [x] Design Level 3
  - [x] Design Level 4
  - [x] Design Level 5
- - [ ] Design Level 6
+ - [x] Design Level 6
  
 ###### Sprites
  - [ ] Design Character
