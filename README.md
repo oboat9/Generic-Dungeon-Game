@@ -27,7 +27,7 @@ A Generic Dungeon Game Made For Computer Science 10
 ## Tasks
 #### Design & Planning
 ###### Levels
- - [ ] Design Level 1
+ - [x] Design Level 1
  - [ ] Design Level 2
  - [ ] Design Level 3
  - [ ] Design Level 4
