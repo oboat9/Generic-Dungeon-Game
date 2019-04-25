@@ -1,7 +1,9 @@
-# KidsCanCode - Game Development with Pygame video series
-# Tile-based game - Part 2
-# Collisions and Tilemaps
-# Video link: https://youtu.be/ajR4BZBKTr4
+# Generic Dungeon Game
+# By Owen Stevenson
+# started April 25th, 2019
+# completed --
+
+# Main File
 import pygame as pg
 import sys
 from os import path
