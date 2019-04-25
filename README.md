@@ -47,11 +47,12 @@ A Generic Dungeon Game Made For Computer Science 10
  
 #### Programming
 ###### Backend
- - [ ] Pygame Shell
+ - [x] Pygame Shell
  - [ ] Import Sprites & Images
  - [ ] Import Sound & Music
 ###### Game Fundamentals
- - [ ] Basic Movement
+ - [x] Basic Movement
+ - [x] Tile Based Game Basics
  - [ ] Obstacles For Player
 ###### Game Look
  - [ ] Player Sprite & Animation
