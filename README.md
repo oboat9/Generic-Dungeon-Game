@@ -4,6 +4,10 @@ A Generic Dungeon Game Made For Computer Science 10
 ### Important Note
  - In order to run this you **Must** have Python 3.7+ https://www.python.org/ and Pygame https://www.pygame.org/ installed.
 
+### Controls
+ - Movement is either the arrow keys or WASD
+ - Shooting is Left Mouse Click
+
 ## Project Criteria
  - 6 Levels
  - Key and exit for each level
