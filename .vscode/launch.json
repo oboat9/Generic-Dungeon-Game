@@ -1,0 +1,15 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "Z:/My Drive/Classrooms/Classroom 10/Computer Science 10/Programming/Final Project A/Generic-Dungeon-Game/main.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}

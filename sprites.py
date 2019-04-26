@@ -33,7 +33,7 @@ class Wall(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.image = pg.Surface((TILESIZE, TILESIZE))
-        self.image.fill(RED)
+        self.image.fill(DARKRED)
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
