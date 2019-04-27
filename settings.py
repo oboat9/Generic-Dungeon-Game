@@ -9,16 +9,16 @@ DARKRED = (128, 0, 0)
 YELLOW = (255, 255, 0)
 
 # Main Settings
-WIDTH = 1760   # 16 * 64 or 32 * 32 or 64 * 16
-HEIGHT = 960  # 16 * 48 or 32 * 24 or 64 * 12
+WIDTH = 1024   # 16 * 64 or 32 * 32 or 64 * 16
+HEIGHT = 768  # 16 * 48 or 32 * 24 or 64 * 12
 FPS = 60
 TITLE = "Generic Dungeon Game"
 BGCOLOR = DARKGREY
 
-TILESIZE = 32
+TILESIZE = 64
 GRIDWIDTH = WIDTH / TILESIZE
 GRIDHEIGHT = HEIGHT / TILESIZE
 
 
 # Player settings
-PLAYER_SPEED = 200
+PLAYER_SPEED = 325
