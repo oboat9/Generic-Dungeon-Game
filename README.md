@@ -50,14 +50,14 @@ A Generic Dungeon Game Made For Computer Science 10
  - [ ] Design Music
  
 #### Programming
-###### Backend
- - [x] Pygame Shell
- - [ ] Import Sprites & Images
- - [ ] Import Sound & Music
 ###### Game Fundamentals
  - [x] Basic Movement
- - [x] Tile Based Game Basics
- - [ ] Obstacles For Player
+ - [x] Obstacles For Player
+ - [x] Scrolling Camera
 ###### Game Look
  - [ ] Player Sprite & Animation
  - [ ] Enemy Sprite & Animation
+###### Game Mechanics
+ - [ ] Impliment Enemies
+ - [ ] Impliment Weapons
+ - [ ] Impliment Level Finish (Start next level when done last one)
