@@ -14,10 +14,11 @@ from sprites import *
 from tilemap import *
 
 
+
 class Game:
     def __init__(self):
         pg.init()
-        self.screen = pg.display.set_mode((WIDTH, HEIGHT))
+        self.screen = pg.display.set_mode((WIDTH, HEIGHT))#, pg.RESIZABLE)
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         pg.key.set_repeat(1, 100)
@@ -27,7 +28,7 @@ class Game:
         game_folder = path.dirname(__file__)
         map_folder = path.join(game_folder, "map_folder")
         img_folder = path.join(game_folder, "img")
-        self.map = Map(path.join(map_folder, 'map4.txt'))
+        self.map = Map(path.join(map_folder, 'map3.txt'))
         self.player_image = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
 
     def new(self):
@@ -77,6 +78,14 @@ class Game:
     def events(self):
         # catch all events here
         for event in pg.event.get():
+        #this part below is for window resizing (may or may not add) (hidden)
+            """
+            if event.type == pg.VIDEORESIZE:
+            # There's some code to add back window content here.
+                surface = pg.display.set_mode((event.w, event.h),pg.RESIZABLE)
+                HEIGHT = event.h
+                WIDTH = event.w
+            """    
             if event.type == pg.QUIT:
                 self.quit()
             if event.type == pg.KEYDOWN:

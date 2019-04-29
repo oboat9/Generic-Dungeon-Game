@@ -1,4 +1,4 @@
-# prest colours
+# preset colours
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 DARKGREY = (40, 40, 40)
@@ -7,19 +7,20 @@ GREEN = (0, 255, 0)
 RED = (255,0,0)
 DARKRED = (128, 0, 0)
 YELLOW = (255, 255, 0)
+BLUE = (0, 0, 255)
 
 # Main Settings
-WIDTH = 1024   # 16 * 64 or 32 * 32 or 64 * 16
-HEIGHT = 768  # 16 * 48 or 32 * 24 or 64 * 12
+WIDTH = 1600   # should be divisible by 32 but not required
+HEIGHT = 900  # should be divisible by 32 but not required
 FPS = 60
 TITLE = "Generic Dungeon Game"
 BGCOLOR = DARKGREY
 
-TILESIZE = 64
+TILESIZE = 128
 GRIDWIDTH = WIDTH / TILESIZE
 GRIDHEIGHT = HEIGHT / TILESIZE
 
 
 # Player settings
-PLAYER_SPEED = 325
+PLAYER_SPEED = 500
 PLAYER_IMG = "manBlue_gun.png"
