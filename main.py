@@ -16,6 +16,7 @@ from tilemap import *
 
 
 class Game:
+    # runs first
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))#, pg.RESIZABLE)
@@ -24,6 +25,7 @@ class Game:
         pg.key.set_repeat(1, 100)
         self.load_data()
 
+    # loads all the game files into pygame memory
     def load_data(self):
         game_folder = path.dirname(__file__)
         map_folder = path.join(game_folder, "map_folder")
@@ -42,6 +44,7 @@ class Game:
         self.mobs = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
 
+        # turns the map text file into an actual game map
         for row, tiles in enumerate(self.map.data):
             for col, tile in enumerate(tiles):
                 if tile == '1':
@@ -53,7 +56,7 @@ class Game:
         self.camera = Camera(self.map.width, self.map.height)
 
     def run(self):
-        # game loop - set self.playing = False to end the game
+        # game loop -- set self.playing = False to end the game
         self.playing = True
         while self.playing:
             self.dt = self.clock.tick(FPS) / 1000
@@ -61,6 +64,7 @@ class Game:
             self.update()
             self.draw()
 
+    #quits the game
     def quit(self):
         pg.quit()
         exit(0)
@@ -75,6 +79,7 @@ class Game:
         for hits in hits:
             hits.kill()
     
+    #draws the grid (not in use currently)
     def draw_grid(self):
         for x in range(0, WIDTH, TILESIZE):
             pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
@@ -108,10 +113,10 @@ class Game:
                 if event.key == pg.K_ESCAPE:
                     self.quit()
                 
-
+    # not used currently
     def show_start_screen(self):
         pass
-
+    # not used currently
     def show_go_screen(self):
         pass
 

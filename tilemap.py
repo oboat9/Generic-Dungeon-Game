@@ -6,6 +6,7 @@ from settings import *
 def collide_hit_rect(one, two):
     return one.hit_rect.colliderect(two.rect)
 
+ # makes the map .txt file into a game map
 class Map:
     def __init__(self, filename):
         self.data = []
@@ -18,6 +19,7 @@ class Map:
         self.width = self.tilewidth * TILESIZE
         self.height = self.tileheight * TILESIZE
 
+ # makes the game follow the player around when you are moving past the threshold
 class Camera:
     def __init__(self, width, height):
         self.camera = pg.Rect(0, 0, width, height)
@@ -31,7 +33,8 @@ class Camera:
         x = -target.rect.centerx + int(WIDTH / 2) 
         y = -target.rect.centery + int(HEIGHT / 2)
 
-        # limit scrolling to map size
+         # limit scrolling to map size (so you don't see past the edge)
+            # when you get near the edge of the map the camera stops following
         x = min(0, x) # left
         y = min(0, y) # top
         x = max(-(self.width - WIDTH), x) # right

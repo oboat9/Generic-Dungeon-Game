@@ -17,6 +17,7 @@ BROWN = (106, 55, 5)
 WIDTH = 1600   # should be divisible by 32 but not required
 HEIGHT = 900  # should be divisible by 32 but not required
 FPS = 60
+
 TITLE = "Generic Dungeon Game"
 BGCOLOR = BROWN
 
@@ -24,6 +25,7 @@ TILESIZE = 64
 GRIDWIDTH = WIDTH / TILESIZE
 GRIDHEIGHT = HEIGHT / TILESIZE
 
+# Wall Settings
 WALL_IMG = 'tileGreen_39.png'
 
 # Player settings
