@@ -10,21 +10,27 @@ RED = (255,0,0)
 DARKRED = (128, 0, 0)
 YELLOW = (255, 255, 0)
 BLUE = (0, 0, 255)
+BROWN = (106, 55, 5)
 
 # Main Settings
 WIDTH = 1600   # should be divisible by 32 but not required
 HEIGHT = 900  # should be divisible by 32 but not required
 FPS = 60
 TITLE = "Generic Dungeon Game"
-BGCOLOR = DARKGREY
+BGCOLOR = BROWN
 
 TILESIZE = 64
 GRIDWIDTH = WIDTH / TILESIZE
 GRIDHEIGHT = HEIGHT / TILESIZE
 
+WALL_IMG = 'tileGreen_39.png'
 
 # Player settings
-PLAYER_SPEED = 400
+PLAYER_SPEED = 300
 PLAYER_IMG = "manBlue_gun.png"
 PLAYER_ROT_SPEED = 250
 PLAYER_HIT_RECT = pg.Rect(0,0,35,35)
+
+# Mob settings
+MOB_IMG = 'zombie1_hold.png'
+MOB_SPEED = 150
