@@ -62,17 +62,18 @@ class Game:
         self.camera.update(self.player)
     
     def draw_grid(self):
-        pass
-        #for x in range(0, WIDTH, TILESIZE):
-            #pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
-        #for y in range(0, HEIGHT, TILESIZE):
-            #pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
+        for x in range(0, WIDTH, TILESIZE):
+            pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
+        for y in range(0, HEIGHT, TILESIZE):
+            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
     
     def draw(self):
         self.screen.fill(BGCOLOR)
         self.draw_grid()
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image, self.camera.apply(sprite))
+        #drawing player hitbox for debug
+        #pg.draw.rect(self.screen, WHITE, self.camera.apply(self.player), 2)
         pg.display.flip()
 
     def events(self):
