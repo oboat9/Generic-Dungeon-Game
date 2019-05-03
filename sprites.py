@@ -36,13 +36,12 @@ class Player(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
         self.image = game.player_image
-        #self.image = pg.transform.scale2x(self.image)
         self.rect = self.image.get_rect()
          # give the hitbox a seperate rectangle 
         self.hit_rect = PLAYER_HIT_RECT
         self.hit_rect.center = self.rect.center
         self.vel = vec(0, 0)
-        # maps the location to the proper tile
+         # maps the location to the proper tile
         self.pos = vec(x, y) * TILESIZE
         self.rot = 0
         self.last_shot = 0
@@ -86,6 +85,7 @@ class Player(pg.sprite.Sprite):
         self.rect.center = self.pos
         self.pos += self.vel * self.game.dt
         self.hit_rect.centerx = self.pos.x
+
             # horizontal collisions
         collide_with_walls(self, self.game.walls, 'x')
         self.hit_rect.centery = self.pos.y
@@ -163,6 +163,7 @@ class Mob(pg.sprite.Sprite):
             # horizontal collisions
         collide_with_walls(self, self.game.walls, 'x')
         self.hit_rect.centery = self.pos.y
+        
             # vertical collisions
         collide_with_walls(self, self.game.walls, 'y')
         self.rect.center = self.hit_rect.center
@@ -172,12 +173,11 @@ class Wall(pg.sprite.Sprite):
         self.groups = game.all_sprites, game.walls
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        
         self.image = game.wall_img
 
-    #for making the walls plain rectangles without an image
-        ##self.image = pg.Surface((TILESIZE, TILESIZE))
-        ##self.image.fill(DARKRED)
+        #for making the walls plain rectangles without an image
+            ##self.image = pg.Surface((TILESIZE, TILESIZE))
+            ##self.image.fill(DARKRED)
 
         self.rect = self.image.get_rect()
             # sets the location
