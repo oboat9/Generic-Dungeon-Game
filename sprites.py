@@ -1,5 +1,5 @@
 import pygame as pg
-
+from random import uniform
 
 from settings import *
 from tilemap import *
@@ -59,7 +59,9 @@ class Player(pg.sprite.Sprite):
             if now - self.last_shot > BULLET_RATE:
                 self.last_shot = now
                 dir = vec(1, 0).rotate(-self.rot)
-                Bullet(self.game, self.pos, dir)
+                pos = self.pos + BARREL_OFFSET.rotate(-self.rot)
+                Bullet(self.game, pos, dir)
+                self.vel = vec(-KICKBACK, 0).rotate(-self.rot)
 
 
     def update(self):
@@ -82,16 +84,19 @@ class Bullet(pg.sprite.Sprite):
         self.game = game
         self.image = game.bullet_img
         self.rect = self.image.get_rect()
-        self.pos = pos
+        self.pos = vec(pos)
         self.rect.center = pos
-        self.vel = dir * BULLET_SPEED
+        spread = uniform(-GUN_SPREAD, GUN_SPREAD)
+        self.vel = dir.rotate(spread) * BULLET_SPEED
         self.spawn_time = pg.time.get_ticks()
 
     def update(self):
         self.pos += self.vel * self.game.dt
         self.rect.center = self.pos
+        if pg.sprite.spritecollideany(self, self.game.walls):
+            self.kill()
         if pg.time.get_ticks() - self.spawn_time > BULLET_LIFETIME:
-            self.kill
+            self.kill()
 
 class Mob(pg.sprite.Sprite):
     def __init__(self, game, x, y):

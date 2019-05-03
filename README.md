@@ -58,6 +58,6 @@ A Generic Dungeon Game Made For Computer Science 10
  - [ ] Player Sprite & Animation
  - [ ] Enemy Sprite & Animation
 ###### Game Mechanics
- - [ ] Impliment Enemies
- - [ ] Impliment Weapons
+ - [x] Impliment Enemies
+ - [ ] Impliment Weapons *(partial completion)*
  - [ ] Impliment Level Finish (Start next level when done last one)
