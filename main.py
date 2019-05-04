@@ -82,10 +82,11 @@ class Game:
         self.all_sprites.update()
         self.camera.update(self.player)
 
-        # bullets hit mobsd
+        # bullets hit mobs
         hits = pg.sprite.groupcollide(self.mobs, self.bullets, False, True)
-        for hits in hits:
-            hits.kill()
+        for hit in hits:
+            hit.health -= BULLET_DAMAGE
+            hit.vel = vec(0,0)
     
     #draws the grid (not in use currently)
     def draw_grid(self):

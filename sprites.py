@@ -62,6 +62,8 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_DOWN] or keys[pg.K_s]:
             self.vel = vec(-PLAYER_SPEED / 2, 0).rotate(-self.rot)
 
+
+
          # shooting bullets
         if keys[pg.K_SPACE]:
             now = pg.time.get_ticks()
@@ -70,6 +72,7 @@ class Player(pg.sprite.Sprite):
                 dir = vec(1, 0).rotate(-self.rot)
                 pos = self.pos + BARREL_OFFSET.rotate(-self.rot)
                 Bullet(self.game, pos, dir)
+
                  # kicks the player back when shooting
                 self.vel = vec(-KICKBACK, 0).rotate(-self.rot)
 
@@ -140,6 +143,7 @@ class Mob(pg.sprite.Sprite):
         self.acc = vec(0,0)
         self.rect.center = self.pos
         self.rot = 0
+        self.health = MOB_HEALTH
 
     def update(self):
             # rotates the mob
@@ -167,6 +171,11 @@ class Mob(pg.sprite.Sprite):
             # vertical collisions
         collide_with_walls(self, self.game.walls, 'y')
         self.rect.center = self.hit_rect.center
+
+            # when health less than zero kill the mob
+        if self.health <= 0:
+            self.kill()
+        
 
 class Wall(pg.sprite.Sprite):
     def __init__(self, game, x, y):
