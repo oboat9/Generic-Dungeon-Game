@@ -165,7 +165,7 @@
   <object id="122" name="wall" x="2304" y="1344" width="832" height="64"/>
   <object id="123" name="wall" x="2304" y="1024" width="64" height="320"/>
   <object id="124" name="wall" x="2304" y="960" width="256" height="64"/>
-  <object id="125" name="wall" x="656" y="464" width="144" height="32"/>
+  <object id="125" name="wall" x="656" y="464" width="160" height="32"/>
   <object id="126" name="wall" x="1280" y="384" width="64" height="256"/>
   <object id="127" name="wall" x="1088" y="576" width="192" height="64"/>
   <object id="128" name="wall" x="656" y="652" width="160" height="43"/>
