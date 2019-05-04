@@ -40,7 +40,7 @@ class Game:
         self.mob_img = pg.image.load(path.join(img_folder, MOB_IMG)).convert_alpha()
         self.wall_img = pg.image.load(path.join(img_folder, WALL_IMG)).convert_alpha()
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE,TILESIZE))
-        pg.mixer.music.load("Z:\My Drive\Classrooms\Classroom 10\Computer Science 10\Programming\Final Project A\Generic-Dungeon-Game\snd\Music\Menu\mainmenu.wav")
+        pg.mixer.music.load("snd/Music/Menu/mainmenu.wav")
 
     def new(self):
         # start the music
