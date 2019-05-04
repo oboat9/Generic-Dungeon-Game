@@ -197,13 +197,13 @@ class Game:
 g = Game()
 g.show_start_screen()
 while True:
-    #current_Level = "level1.tmx"
-    #g.load_data
+    current_Level = "level1.tmx"
+    g.load_data
     g.new()
     g.run()
     g.show_go_screen()
 
-    #current_Level = "level2.tmx"
-    #g.load_data()
-    #g.new()
-    #g.run()
+    current_Level = "level2.tmx"
+    g.load_data()
+    g.new()
+    g.run()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="145">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="151">
  <tileset firstgid="1" name="spritesheet_tiles" tilewidth="64" tileheight="64" spacing="10" tilecount="540" columns="27">
   <image source="C:/Users/Owen Stevenson/Downloads/pygame_tutorials-master/tilemap/part 12/img/spritesheet_tiles.png" width="1988" height="1470"/>
  </tileset>
@@ -140,7 +140,7 @@
 </data>
  </layer>
  <objectgroup id="5" name="Obstacles">
-  <object id="95" name="wall" x="448" y="320" width="320" height="64"/>
+  <object id="95" name="wall" x="640" y="0" width="64" height="128"/>
   <object id="99" name="player" x="336" y="208" width="32" height="32"/>
   <object id="101" name="wall" x="400" y="400" width="32" height="32"/>
   <object id="102" name="wall" x="448" y="640" width="64" height="384"/>
@@ -184,5 +184,11 @@
   <object id="142" name="wall" x="1040" y="720" width="32" height="32"/>
   <object id="143" name="wall" x="640" y="912" width="128" height="32"/>
   <object id="144" name="zombie" x="800" y="224" width="32" height="32"/>
+  <object id="145" name="wall" x="448" y="320" width="320" height="64"/>
+  <object id="146" name="wall" x="384" y="128" width="320" height="64"/>
+  <object id="147" name="wall" x="576" y="0" width="64" height="64"/>
+  <object id="148" name="wall" x="448" y="64" width="64" height="64"/>
+  <object id="149" name="wall" x="320" y="0" width="192" height="64"/>
+  <object id="150" name="wall" x="320" y="64" width="64" height="64"/>
  </objectgroup>
 </map>
