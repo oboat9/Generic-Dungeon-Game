@@ -55,7 +55,6 @@ class Game:
         snd_Folder = path.join(game_folder, "snd")
         snd_Effects = path.join(snd_Folder, "sndEffects")
         snd_Music_Folder = path.join(snd_Folder,"Music")
-        snd_Menu_Music = path.join(snd_Music_Folder,"Menu")
 
         self.map = TiledMap(path.join(map_folder, current_Level))
         self.map_img = self.map.make_map()
@@ -68,7 +67,7 @@ class Game:
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE,TILESIZE))
         
         
-        pg.mixer.music.load(path.join(snd_Menu_Music,"mainmenu.wav"))
+        pg.mixer.music.load(path.join(snd_Music_Folder,"mainmenu.wav"))
         self.player_die_snd = pg.mixer.Sound(path.join(snd_Effects,"Player Dying.wav"))
 
     def new(self):
