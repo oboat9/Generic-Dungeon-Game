@@ -14,6 +14,7 @@ from settings import *
 from sprites import *
 from tilemap import *
 
+current_Level = "level1.tmx"
 
 # HUD functions
 def draw_player_health(surf, x, y, pct):
@@ -46,13 +47,16 @@ class Game:
 
     # loads all the game files into pygame memory
     def load_data(self):
+        global current_Level
         game_folder = path.dirname(__file__)
         map_folder = path.join(game_folder, "maps")
         img_folder = path.join(game_folder, "img")
         snd_Folder = path.join(game_folder, "snd")
+        snd_Player = path.join(snd_Folder, "playerSounds")
         snd_Music_Folder = path.join(snd_Folder,"Music")
+        snd_Menu_Music = path.join(snd_Music_Folder,"Menu")
 
-        self.map = TiledMap(path.join(map_folder, "level1.tmx"))
+        self.map = TiledMap(path.join(map_folder, current_Level))
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
 
@@ -61,12 +65,16 @@ class Game:
         self.mob_img = pg.image.load(path.join(img_folder, MOB_IMG)).convert_alpha()
         self.wall_img = pg.image.load(path.join(img_folder, WALL_IMG)).convert_alpha()
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE,TILESIZE))
-        pg.mixer.music.load("snd/Music/Menu/mainmenu.wav")
+        
+        
+        pg.mixer.music.load(path.join(snd_Menu_Music,"mainmenu.wav"))
+        self.player_die_snd = pg.mixer.Sound(path.join(snd_Player,"Player Dying.wav"))
 
     def new(self):
+        
         # start the music
         
-        ##pg.mixer.music.play(-1)
+        pg.mixer.music.play(-1)
         
         # initialize all variables and do all the setup for a new game
         self.all_sprites = pg.sprite.Group()
@@ -75,14 +83,15 @@ class Game:
         self.bullets = pg.sprite.Group()
 
         # turns the map text file into an actual game map
-        #for row, tiles in enumerate(self.map.data):
-        #    for col, tile in enumerate(tiles):
-        #        if tile == '1':
-        #            Wall(self, col, row)
-        #        if tile == 'P':
-        #            self.player = Player(self, col, row)
-        #        if tile == 'M':
-        #            Mob(self, col, row)
+            #for row, tiles in enumerate(self.map.data):
+            #    for col, tile in enumerate(tiles):
+            #        if tile == '1':
+            #            Wall(self, col, row)
+            #        if tile == 'P':
+            #            self.player = Player(self, col, row)
+            #        if tile == 'M':
+            #            Mob(self, col, row)
+        
         for tile_object in self.map.tmxdata.objects:
             if tile_object.name == "player":
                 self.player = Player(self, tile_object.x, tile_object.y)
@@ -118,6 +127,7 @@ class Game:
             self.player.health -= MOB_DAMAGE
             hit.vel = vec(0, 0)
             if self.player.health < 0:
+                channel=self.player_die_snd.play()
                 self.playing = False
         if hits:
             self.player.pos += vec(MOB_KNOCKBACK, 0).rotate(-hits[0].rot)
@@ -186,6 +196,13 @@ class Game:
 g = Game()
 g.show_start_screen()
 while True:
+    #current_Level = "level1.tmx"
+    #g.load_data
     g.new()
     g.run()
     g.show_go_screen()
+
+    #current_Level = "level2.tmx"
+    #g.load_data()
+    #g.new()
+    #g.run()
