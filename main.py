@@ -24,20 +24,27 @@ class Game:
         self.clock = pg.time.Clock()
         pg.key.set_repeat(1, 100)
         self.load_data()
+        pg.mixer.init()
 
     # loads all the game files into pygame memory
     def load_data(self):
         game_folder = path.dirname(__file__)
         map_folder = path.join(game_folder, "map_folder")
         img_folder = path.join(game_folder, "img")
-        self.map = Map(path.join(map_folder, 'map3.txt'))
+        snd_Folder = path.join(game_folder, "snd")
+        snd_Music_Folder = path.join(snd_Folder,"Music")
+
+        self.map = Map(path.join(map_folder, "map3.txt"))
         self.player_image = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
         self.bullet_img = pg.image.load(path.join(img_folder, BULLET_IMG)).convert_alpha()
         self.mob_img = pg.image.load(path.join(img_folder, MOB_IMG)).convert_alpha()
         self.wall_img = pg.image.load(path.join(img_folder, WALL_IMG)).convert_alpha()
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE,TILESIZE))
+        pg.mixer.music.load("Z:\My Drive\Classrooms\Classroom 10\Computer Science 10\Programming\Final Project A\Generic-Dungeon-Game\snd\Music\Menu\mainmenu.wav")
 
     def new(self):
+        # start the music
+        pg.mixer.music.play(-1)
         # initialize all variables and do all the setup for a new game
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
