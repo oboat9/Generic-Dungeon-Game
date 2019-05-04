@@ -105,6 +105,8 @@ class Game:
         self.screen.fill(BGCOLOR)
         #self.draw_grid()
         for sprite in self.all_sprites:
+            if isinstance(sprite, Mob):
+                sprite.draw_health()
             self.screen.blit(sprite.image, self.camera.apply(sprite))
         #drawing player hitbox for debug
             ##pg.draw.rect(self.screen, WHITE, self.camera.apply(self.player), 2)
