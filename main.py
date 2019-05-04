@@ -49,7 +49,7 @@ class Game:
     # loads all the game files into pygame memory
     def load_data(self):
         global current_Level
-        game_folder = path.dirname(__file__)
+        game_folder = "Z:/My Drive/Classrooms/Classroom 10/Computer Science 10/Programming/Final Project A/Generic-Dungeon-Game"
         map_folder = path.join(game_folder, "maps")
         img_folder = path.join(game_folder, "img")
         snd_Folder = path.join(game_folder, "snd")
