@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="87">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="145">
  <tileset firstgid="1" name="spritesheet_tiles" tilewidth="64" tileheight="64" spacing="10" tilecount="540" columns="27">
   <image source="C:/Users/Owen Stevenson/Downloads/pygame_tutorials-master/tilemap/part 12/img/spritesheet_tiles.png" width="1988" height="1470"/>
  </tileset>
@@ -139,4 +139,50 @@
 0,0,0,0,0,0,0,0,0,2684354853,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="5" name="Obstacles">
+  <object id="95" name="wall" x="448" y="320" width="320" height="64"/>
+  <object id="99" name="player" x="336" y="208" width="32" height="32"/>
+  <object id="101" name="wall" x="400" y="400" width="32" height="32"/>
+  <object id="102" name="wall" x="448" y="640" width="64" height="384"/>
+  <object id="103" name="wall" x="512" y="960" width="896" height="64"/>
+  <object id="104" name="wall" x="960" y="832" width="64" height="128"/>
+  <object id="105" name="wall" x="960" y="640" width="64" height="128"/>
+  <object id="106" name="wall" x="1024" y="640" width="320" height="64"/>
+  <object id="107" name="wall" x="1344" y="320" width="64" height="640"/>
+  <object id="108" name="wall" x="896" y="320" width="448" height="64"/>
+  <object id="109" name="wall" x="2624" y="960" width="64" height="384"/>
+  <object id="110" name="wall" x="2304" y="512" width="64" height="320"/>
+  <object id="112" name="wall" x="2304" y="832" width="256" height="64"/>
+  <object id="113" name="wall" x="2752" y="832" width="256" height="64"/>
+  <object id="114" name="wall" x="2624" y="576" width="64" height="320"/>
+  <object id="115" name="wall" x="2368" y="512" width="768" height="64"/>
+  <object id="116" name="wall" x="3136" y="512" width="64" height="896"/>
+  <object id="117" name="wall" x="3072" y="960" width="64" height="64"/>
+  <object id="118" name="wall" x="3072" y="832" width="64" height="64"/>
+  <object id="119" name="wall" x="2752" y="960" width="256" height="64"/>
+  <object id="120" name="wall" x="2752" y="832" width="256" height="64"/>
+  <object id="121" name="wall" x="2880" y="1024" width="64" height="320"/>
+  <object id="122" name="wall" x="2304" y="1344" width="832" height="64"/>
+  <object id="123" name="wall" x="2304" y="1024" width="64" height="320"/>
+  <object id="124" name="wall" x="2304" y="960" width="256" height="64"/>
+  <object id="125" name="wall" x="656" y="464" width="144" height="32"/>
+  <object id="126" name="wall" x="1280" y="384" width="64" height="256"/>
+  <object id="127" name="wall" x="1088" y="576" width="192" height="64"/>
+  <object id="128" name="wall" x="656" y="652" width="160" height="43"/>
+  <object id="129" name="wall" x="448" y="384" width="64" height="192"/>
+  <object id="131" name="wall" x="400" y="528" width="32" height="32"/>
+  <object id="132" name="wall" x="400" y="784" width="32" height="32"/>
+  <object id="133" name="wall" x="400" y="656" width="32" height="32"/>
+  <object id="134" name="wall" x="528" y="784" width="32" height="32"/>
+  <object id="135" name="wall" x="528" y="912" width="32" height="32"/>
+  <object id="136" name="wall" x="912" y="912" width="32" height="32"/>
+  <object id="137" name="wall" x="1152" y="768" width="192" height="128"/>
+  <object id="138" name="wall" x="1296" y="720" width="32" height="32"/>
+  <object id="139" name="wall" x="1296" y="912" width="32" height="32"/>
+  <object id="140" name="wall" x="1040" y="912" width="32" height="32"/>
+  <object id="141" name="wall" x="1040" y="720" width="32" height="32"/>
+  <object id="142" name="wall" x="1040" y="720" width="32" height="32"/>
+  <object id="143" name="wall" x="640" y="912" width="128" height="32"/>
+  <object id="144" name="zombie" x="800" y="224" width="32" height="32"/>
+ </objectgroup>
 </map>

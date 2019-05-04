@@ -8,6 +8,7 @@ from os import path
 
 # Main File
 import pygame as pg
+import pytmx
 
 from settings import *
 from sprites import *
@@ -46,12 +47,15 @@ class Game:
     # loads all the game files into pygame memory
     def load_data(self):
         game_folder = path.dirname(__file__)
-        map_folder = path.join(game_folder, "map_folder")
+        map_folder = path.join(game_folder, "maps")
         img_folder = path.join(game_folder, "img")
         snd_Folder = path.join(game_folder, "snd")
         snd_Music_Folder = path.join(snd_Folder,"Music")
 
-        self.map = Map(path.join(map_folder, "map3.txt"))
+        self.map = TiledMap(path.join(map_folder, "level1.tmx"))
+        self.map_img = self.map.make_map()
+        self.map_rect = self.map_img.get_rect()
+
         self.player_image = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
         self.bullet_img = pg.image.load(path.join(img_folder, BULLET_IMG)).convert_alpha()
         self.mob_img = pg.image.load(path.join(img_folder, MOB_IMG)).convert_alpha()
@@ -61,7 +65,9 @@ class Game:
 
     def new(self):
         # start the music
-        pg.mixer.music.play(-1)
+        
+        ##pg.mixer.music.play(-1)
+        
         # initialize all variables and do all the setup for a new game
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
@@ -69,16 +75,23 @@ class Game:
         self.bullets = pg.sprite.Group()
 
         # turns the map text file into an actual game map
-        for row, tiles in enumerate(self.map.data):
-            for col, tile in enumerate(tiles):
-                if tile == '1':
-                    Wall(self, col, row)
-                if tile == 'P':
-                    self.player = Player(self, col, row)
-                if tile == 'M':
-                    Mob(self, col, row)
-        
+        #for row, tiles in enumerate(self.map.data):
+        #    for col, tile in enumerate(tiles):
+        #        if tile == '1':
+        #            Wall(self, col, row)
+        #        if tile == 'P':
+        #            self.player = Player(self, col, row)
+        #        if tile == 'M':
+        #            Mob(self, col, row)
+        for tile_object in self.map.tmxdata.objects:
+            if tile_object.name == "player":
+                self.player = Player(self, tile_object.x, tile_object.y)
+            if tile_object.name == "zombie":
+                Mob(self, tile_object.x, tile_object.y)
+            if tile_object.name == "wall":
+                Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
         self.camera = Camera(self.map.width, self.map.height)
+        self.draw_debug = False
 
     def run(self):
         # game loop -- set self.playing = False to end the game
@@ -129,13 +142,22 @@ class Game:
      # draws everything including the final "pg.display.flip()" command
     def draw(self):
         pg.display.set_caption("{:.2f}".format(self.clock.get_fps()))
-        self.screen.fill(BGCOLOR)
+        #self.screen.fill(BGCOLOR)
+        self.screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
+
         #self.draw_grid()
         for sprite in self.all_sprites:
             if isinstance(sprite, Mob):
                 sprite.draw_health()
             self.screen.blit(sprite.image, self.camera.apply(sprite))
-        #drawing player hitbox for debug
+            
+            if self.draw_debug:
+                pg.draw.rect(self.screen, CYAN, self.camera.apply_rect(sprite.hit_rect), 4)
+            if self.draw_debug:
+                for wall in self.walls:
+                    pg.draw.rect(self.screen, CYAN, self.camera.apply_rect(wall.rect), 4)
+
+
             ##pg.draw.rect(self.screen, WHITE, self.camera.apply(self.player), 2)
         
         # HUD functions
@@ -145,19 +167,13 @@ class Game:
     def events(self):
         # catch all events here
         for event in pg.event.get():
-        #this part below is for window resizing (may or may not add) (hidden)
-            """
-            if event.type == pg.VIDEORESIZE:
-            # There's some code to add back window content here.
-                surface = pg.display.set_mode((event.w, event.h),pg.RESIZABLE)
-                HEIGHT = event.h
-                WIDTH = event.w
-            """    
             if event.type == pg.QUIT:
                 self.quit()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     self.quit()
+                if event.key == pg.K_h:
+                    self.draw_debug = not self.draw_debug
                 
     # not used currently
     def show_start_screen(self):
