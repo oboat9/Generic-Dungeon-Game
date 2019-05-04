@@ -46,8 +46,8 @@ A Generic Dungeon Game Made For Computer Science 10
  - [ ] Design "Key"
  
 ###### Sound
- - [ ] Design Sound Effects
- - [ ] Design Music
+ - [x] Design Sound Effects
+ - [x] Design Music
  
 #### Programming
 ###### Game Fundamentals
