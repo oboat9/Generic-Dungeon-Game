@@ -9,6 +9,7 @@ from os import path
 # Main File
 import pygame as pg
 import pytmx
+import time
 
 from settings import *
 from sprites import *
@@ -52,7 +53,7 @@ class Game:
         map_folder = path.join(game_folder, "maps")
         img_folder = path.join(game_folder, "img")
         snd_Folder = path.join(game_folder, "snd")
-        snd_Player = path.join(snd_Folder, "playerSounds")
+        snd_Effects = path.join(snd_Folder, "sndEffects")
         snd_Music_Folder = path.join(snd_Folder,"Music")
         snd_Menu_Music = path.join(snd_Music_Folder,"Menu")
 
@@ -68,7 +69,7 @@ class Game:
         
         
         pg.mixer.music.load(path.join(snd_Menu_Music,"mainmenu.wav"))
-        self.player_die_snd = pg.mixer.Sound(path.join(snd_Player,"Player Dying.wav"))
+        self.player_die_snd = pg.mixer.Sound(path.join(snd_Effects,"Player Dying.wav"))
 
     def new(self):
         
@@ -190,7 +191,8 @@ class Game:
         pass
     # not used currently
     def show_go_screen(self):
-        pass
+        pg.mixer.music.stop()
+        time.sleep(1)
 
 # create the game object
 g = Game()
