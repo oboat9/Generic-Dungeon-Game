@@ -46,8 +46,10 @@ A Generic Dungeon Game Made For Computer Science 10
  - [ ] Design "Key"
  
 ###### Sound
- - [x] Design Sound Effects
- - [x] Design Music
+ - [ ] Design Sound Effects *(In Progress)*
+ ####### Music
+ - [x] Design Menu Music
+ - [ ] Design Game Music
  
 #### Programming
 ###### Game Fundamentals
@@ -55,9 +57,9 @@ A Generic Dungeon Game Made For Computer Science 10
  - [x] Obstacles For Player
  - [x] Scrolling Camera
 ###### Game Look
- - [ ] Player Sprite & Animation
- - [ ] Enemy Sprite & Animation
+ - [ ] Player Sprite & Animation *(In Progress)*
+ - [ ] Enemy Sprite & Animation *(In Progress)*
 ###### Game Mechanics
  - [x] Impliment Enemies
- - [ ] Impliment Weapons *(partial completion)*
+ - [ ] Impliment Weapons *(In Progress)*
  - [ ] Impliment Level Finish (Start next level when done last one)
