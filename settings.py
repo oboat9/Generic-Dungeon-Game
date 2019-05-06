@@ -15,8 +15,8 @@ BROWN = (106, 55, 5)
 CYAN = (0, 255, 255)
 
 # Main Settings
-WIDTH = 1600   # should be divisible by 32 but not required
-HEIGHT = 900  # should be divisible by 32 but not required
+WIDTH = 1280
+HEIGHT = 700
 FPS = 60
 
 TITLE = "Generic Dungeon Game"

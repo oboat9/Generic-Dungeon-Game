@@ -49,14 +49,12 @@ class Game:
     # loads all the game files into pygame memory
     def load_data(self):
         global current_Level
-        game_folder = "Z:/My Drive/Classrooms/Classroom 10/Computer Science 10/Programming/Final Project A/Generic-Dungeon-Game"
-        map_folder = path.join(game_folder, "maps")
-        img_folder = path.join(game_folder, "img")
-        snd_Folder = path.join(game_folder, "snd")
-        snd_Effects = path.join(snd_Folder, "sndEffects")
-        snd_Music_Folder = path.join(snd_Folder,"Music")
+        map_folder = "maps"
+        img_folder = "img"
+        snd_Folder = "snd"
 
-        self.map = TiledMap(path.join(map_folder, current_Level))
+        self.map = TiledMap(path.join("maps", current_Level))
+        #print(path.join("maps", current_Level))
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
 
@@ -67,8 +65,8 @@ class Game:
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE,TILESIZE))
         
         
-        pg.mixer.music.load(path.join(snd_Music_Folder,"mainmenu.wav"))
-        self.player_die_snd = pg.mixer.Sound(path.join(snd_Effects,"Player Dying.wav"))
+        pg.mixer.music.load(path.join(snd_Folder,"mainmenu.wav"))
+        self.player_die_snd = pg.mixer.Sound(path.join(snd_Folder,"Player Dying.wav"))
 
     def new(self):
         
@@ -198,12 +196,7 @@ g = Game()
 g.show_start_screen()
 while True:
     current_Level = "level1.tmx"
-    g.load_data
-    g.new()
-    g.run()
-    g.show_go_screen()
-
-    current_Level = "level2.tmx"
     g.load_data()
     g.new()
     g.run()
+    g.show_go_screen()
