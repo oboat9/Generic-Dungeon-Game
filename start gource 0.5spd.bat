@@ -1,1 +1,0 @@
-gource --seconds-per-day .5
