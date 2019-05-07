@@ -135,6 +135,10 @@ class Game:
         for hit in hits:
             hit.health -= BULLET_DAMAGE
             hit.vel = vec(0,0)
+        
+        print(self.player.rect.left)
+        if self.player.rect.left > 3200:
+            self.playing = False
     
     #draws the grid (not in use currently)
     def draw_grid(self):
@@ -189,7 +193,7 @@ class Game:
     # not used currently
     def show_go_screen(self):
         pg.mixer.music.stop()
-        time.sleep(1)
+
 
 # create the game object
 g = Game()
@@ -199,4 +203,8 @@ while True:
     g.load_data()
     g.new()
     g.run()
-    g.show_go_screen()
+
+    current_Level = "level2.tmx"
+    g.load_data()
+    g.new()
+    g.run()
