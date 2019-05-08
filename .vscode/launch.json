@@ -8,7 +8,7 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "Z:/My Drive/Classrooms/Classroom 10/Computer Science 10/Programming/Final Project A/Generic-Dungeon-Game/main.py",
+            "program": "C:/Users/owen/Documents/GitHub/Generic-Dungeon-Game/main.py",
             "console": "integratedTerminal"
         }
     ]
