@@ -136,8 +136,7 @@ class Game:
             hit.health -= BULLET_DAMAGE
             hit.vel = vec(0,0)
         
-        print(self.player.rect.left)
-        if self.player.rect.left > 3200:
+        if self.player.rect.left > self.map_rect.right:
             self.playing = False
     
     #draws the grid (not in use currently)
