@@ -43,18 +43,19 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         pg.key.set_repeat(1, 100)
-        self.load_data()
+        self.load_data(current_Level)
         pg.mixer.init()
+        
 
     # loads all the game files into pygame memory
-    def load_data(self):
-        global current_Level
+    def load_data(self, current_Level="level1.tmx"):
         map_folder = "maps"
         img_folder = "img"
         snd_Folder = "snd"
 
-        self.map = TiledMap(path.join("maps", current_Level))
-        #print(path.join("maps", current_Level))
+        self.current_Level = current_Level
+        self.map = TiledMap(path.join("maps", self.current_Level))
+
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
 
@@ -124,9 +125,10 @@ class Game:
         for hit in hits:
             self.player.health -= MOB_DAMAGE
             hit.vel = vec(0, 0)
-            if self.player.health < 0:
+            if self.player.health <= 0:
                 channel=self.player_die_snd.play()
                 self.playing = False
+                RunGame()
         if hits:
             self.player.pos += vec(MOB_KNOCKBACK, 0).rotate(-hits[0].rot)
 
@@ -188,22 +190,28 @@ class Game:
                 
     # not used currently
     def show_start_screen(self):
-        pass
+        self.current_Level = "level1.tmx"
+        RunGame()
     # not used currently
     def show_go_screen(self):
         pg.mixer.music.stop()
 
 
 # create the game object
-g = Game()
-g.show_start_screen()
-while True:
-    current_Level = "level1.tmx"
-    g.load_data()
-    g.new()
-    g.run()
+def RunGame():
+    global current_Level, levelnum
+    while True:
+        #current_Level = g.current_Level
+        g.load_data(current_Level)
+        g.new()
+        g.run()
+        levelnum += 1
+        current_Level = "level" + str(levelnum) + ".tmx"
 
-    current_Level = "level2.tmx"
-    g.load_data()
-    g.new()
-    g.run()
+        if levelnum > NUMBEROFLEVELS:
+            levelnum = 1
+
+g = Game()
+current_Level = "level1.tmx"
+levelnum = 1
+g.show_start_screen()
