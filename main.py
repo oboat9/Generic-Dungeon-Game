@@ -119,6 +119,7 @@ class Game:
         # update portion of the game loop
         self.all_sprites.update()
         self.camera.update(self.player)
+        print(len(self.mobs))
 
         # mobs hit player
         hits = pg.sprite.spritecollide(self.player, self.mobs, False, collide_hit_rect)
@@ -138,7 +139,7 @@ class Game:
             hit.health -= BULLET_DAMAGE
             hit.vel = vec(0,0)
         
-        if self.player.rect.left > self.map_rect.right:
+        if self.player.rect.left > self.map_rect.right-TILESIZE and len(self.mobs) == 0:
             self.playing = False
     
     #draws the grid (not in use currently)
