@@ -38,6 +38,7 @@ class Player(pg.sprite.Sprite):
         self.game = game
         self.image = game.player_image
         self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
          # give the hitbox a seperate rectangle 
         self.hit_rect = PLAYER_HIT_RECT
         self.hit_rect.center = self.rect.center
@@ -132,6 +133,7 @@ class Mob(pg.sprite.Sprite):
         self.game = game
         self.image = game.mob_img
         self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
 
             # makes sure each mob has its own hitbox
         self.hit_rect = MOB_HIT_RECT.copy()

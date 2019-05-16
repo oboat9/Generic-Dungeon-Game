@@ -181,10 +181,10 @@
   <object id="59" name="wall" x="400" y="528" width="32" height="32"/>
   <object id="60" name="wall" x="400" y="400" width="32" height="32"/>
   <object id="63" name="zombie" x="1168" y="912" width="32" height="32"/>
-  <object id="90" name="wall" x="384" y="0" width="2816" height="16"/>
+  <object id="90" name="wall" x="0" y="0" width="3200" height="16"/>
   <object id="92" name="wall" x="0" y="1904" width="3200" height="16"/>
   <object id="93" name="wall" x="3184" y="0" width="16" height="512"/>
-  <object id="94" name="wall" x="0" y="256" width="16" height="1664"/>
+  <object id="94" name="wall" x="0" y="0" width="16" height="1920"/>
   <object id="95" name="wall" x="768" y="344" width="128" height="16"/>
   <object id="96" name="wall" x="1842" y="407" width="64" height="64"/>
   <object id="97" name="wall" x="2352" y="576" width="16" height="256"/>
