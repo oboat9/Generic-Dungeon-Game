@@ -145,6 +145,13 @@ class Mob(pg.sprite.Sprite):
         self.rot = 0
         self.health = MOB_HEALTH
 
+    def avoid_mobs(self):
+        for mob in self.game.mobs:
+            if mob != self:
+                dist = self.pos - mob.pos
+                if 0 < dist.length() < AVOID_RADIUS:
+                    self.acc += dist.normalize()
+
     def update(self):
             # rotates the mob
         self.rot = (self.game.player.pos - self.pos).angle_to(vec(1,0))
@@ -155,7 +162,9 @@ class Mob(pg.sprite.Sprite):
         self.rect.center = self.pos
 
             # makes the mob chase the player
-        self.acc = vec(MOB_SPEED, 0).rotate(-self.rot)
+        self.acc = vec(1, 0).rotate(-self.rot)
+        self.avoid_mobs()
+        self.acc.scale_to_length(MOB_SPEED)
             # updates mob location to match the new rotation/location
 
         self.acc += self.vel * -1
