@@ -1,4 +1,5 @@
 import pygame as pg
+import random
 vec = pg.math.Vector2
 
 # preset colours
@@ -50,7 +51,7 @@ BULLET_DAMAGE = 10
 
 # Mob settings
 MOB_IMG = 'zombie1_hold.png'
-MOB_SPEED = 150
+MOB_SPEEDS = [150, 150, 100, 125, 175]
 MOB_HIT_RECT = pg.Rect(0,0,30,30)
 MOB_HEALTH = 100
 MOB_DAMAGE = 10

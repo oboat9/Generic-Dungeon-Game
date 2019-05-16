@@ -1,6 +1,6 @@
 import pygame as pg
 import pytmx
-from random import uniform
+from random import uniform, choice
 
 from settings import *
 from tilemap import *
@@ -144,6 +144,7 @@ class Mob(pg.sprite.Sprite):
         self.rect.center = self.pos
         self.rot = 0
         self.health = MOB_HEALTH
+        self.speed = choice(MOB_SPEEDS)
 
     def avoid_mobs(self):
         for mob in self.game.mobs:
@@ -164,7 +165,7 @@ class Mob(pg.sprite.Sprite):
             # makes the mob chase the player
         self.acc = vec(1, 0).rotate(-self.rot)
         self.avoid_mobs()
-        self.acc.scale_to_length(MOB_SPEED)
+        self.acc.scale_to_length(self.speed)
             # updates mob location to match the new rotation/location
 
         self.acc += self.vel * -1
