@@ -4,6 +4,7 @@ from random import uniform, choice, randint
 
 from settings import *
 from tilemap import *
+import pytweening as tween
 vec = pg.math.Vector2
 
  # collision dectection code that can be used with any sprite
@@ -97,6 +98,11 @@ class Player(pg.sprite.Sprite):
             # vertical collisions
         collide_with_walls(self, self.game.walls, 'y')
         self.rect.center = self.hit_rect.center
+
+    def add_health(self, amount):
+        self.health += amount
+        if self.health > PLAYER_HEALTH:
+            self.health = PLAYER_HEALTH
 
 class Bullet(pg.sprite.Sprite):
     def __init__(self, game, pos, dir):
@@ -239,6 +245,7 @@ class Obstacle(pg.sprite.Sprite):
         self.rect.y = y
 
 class MuzzleFlash(pg.sprite.Sprite):
+
     def __init__(self, game, pos):
         self._layer = EFFECTS_LAYER
         self.groups = game.all_sprites
@@ -254,3 +261,27 @@ class MuzzleFlash(pg.sprite.Sprite):
     def update(self):
         if pg.time.get_ticks() - self.spawn_time > FLASH_DURATION:
             self.kill()
+
+class Item(pg.sprite.Sprite):
+    def __init__(self, game, pos, type):
+        self._layer = ITEMS_LAYER
+        self.groups = game.all_sprites, game.items
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.image = game.item_images[type]
+        self.rect = self.image.get_rect()
+        self.type = type
+        self.pos = pos
+        self.rect.center = pos
+        self.tween = tween.easeInOutSine
+        self.step = 0
+        self.dir = 1
+
+    def update(self):
+        # bobbing motion
+        offset = BOB_RANGE * (self.tween(self.step / BOB_RANGE) - 0.5)
+        self.rect.centery = self.pos.y + offset * self.dir
+        self.step += BOB_SPEED
+        if self.step > BOB_RANGE:
+            self.step = 0
+            self.dir *= -1
