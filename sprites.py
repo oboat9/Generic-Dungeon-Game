@@ -48,7 +48,10 @@ class Player(pg.sprite.Sprite):
         self.pos = vec(x, y)
         self.rot = 0
         self.last_shot = 0
+        self.reload_timer = 0
         self.health = PLAYER_HEALTH
+        self.remaining_ammo = GUN_AMMO
+        self.remaining_magazines = MAX_GUN_MAGS
 
      # gets the keypresses every tick
     def get_keys(self):
@@ -65,15 +68,26 @@ class Player(pg.sprite.Sprite):
             self.vel = vec(PLAYER_SPEED, 0).rotate(-self.rot)
         if keys[pg.K_DOWN] or keys[pg.K_s]:
             self.vel = vec(-PLAYER_SPEED / 2, 0).rotate(-self.rot)
+        if keys[pg.K_r]:
+            now = pg.time.get_ticks()
+            if now - self.reload_timer > RELOAD_TIME and self.remaining_magazines > 0:
+                self.reload_timer = now
+                self.game.gun_reload_snd.play()
+                self.remaining_magazines -= 1
+                self.remaining_ammo = GUN_AMMO
+            elif self.remaining_magazines <= 0:
+                self.game.no_ammo_reload.play()
+        
 
          # shooting bullets
-        if keys[pg.K_SPACE]:
+        if keys[pg.K_SPACE] and self.remaining_ammo > 0:
             now = pg.time.get_ticks()
             if now - self.last_shot > BULLET_RATE:
                 self.last_shot = now
                 dir = vec(1, 0).rotate(-self.rot)
                 pos = self.pos + BARREL_OFFSET.rotate(-self.rot)
                 Bullet(self.game, pos, dir)
+                self.remaining_ammo -= 1
 
                  # kicks the player back when shooting
                 self.vel = vec(-KICKBACK, 0).rotate(-self.rot)
@@ -99,11 +113,18 @@ class Player(pg.sprite.Sprite):
             # vertical collisions
         collide_with_walls(self, self.game.walls, 'y')
         self.rect.center = self.hit_rect.center
+        #print(self.remaining_ammo)
 
     def add_health(self, amount):
         self.health += amount
         if self.health > PLAYER_HEALTH:
             self.health = PLAYER_HEALTH
+    
+    def add_ammo(self, amount):
+        self.remaining_magazines += amount
+
+        if self.remaining_magazines >= MAX_GUN_MAGS:
+            self.remaining_magazines = MAX_GUN_MAGS
 
 class Bullet(pg.sprite.Sprite):
     def __init__(self, game, pos, dir):
@@ -206,16 +227,17 @@ class Mob(pg.sprite.Sprite):
             #self.game.zombie_die_snd.play()
             self.kill()
             self.game.map_img.blit(self.game.splat, self.pos - vec(32, 32))
+            self.game.mobs_left = len(self.game.mobs)
     
     def draw_health(self):
-        if self.health > 60:
+        if self.health > 30:
             col = GREEN
-        elif self.health > 30:
+        elif self.health > 15:
             col = YELLOW
         else:
             col = RED
 
-        width = int(self.rect.width * self.health/100)
+        width = int(self.rect.width * self.health/50)
         self.health_bar = pg.Rect(0,0, width, 7)
 
         if self.health < 100:
@@ -265,6 +287,7 @@ class MuzzleFlash(pg.sprite.Sprite):
         size = randint(20, 50)
         self.image = pg.transform.scale(choice(game.gun_flashes),(size, size))
         self.rect = self.image.get_rect()
+        self.hit_rect = self.rect
         self.pos = pos
         self.rect.center = pos
         self.spawn_time = pg.time.get_ticks()

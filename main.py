@@ -72,7 +72,7 @@ class Game:
         self.screen.blit(text_surface, text_rect)
         
 
-    # loads all the game files into pg memory
+    # loads all the game files into pygame memory
     def load_data(self, current_Level='level1.tmx'):
         map_folder = 'maps'
         img_folder = 'img'
@@ -107,10 +107,12 @@ class Game:
         pg.mixer.music.load(path.join(snd_Folder,'mainmenu.wav'))
         self.player_die_snd = pg.mixer.Sound(path.join(snd_Folder,'Player Dying.wav'))
         self.zombie_die_snd = pg.mixer.Sound(path.join(snd_Folder,'ZombieDying.wav'))
-
+        self.gun_reload_snd = pg.mixer.Sound(path.join(snd_Folder,'gun reload.wav'))
+        self.no_ammo_reload = pg.mixer.Sound(path.join(snd_Folder,'no more reload.wav'))
         self.item_images = {}
         for item in ITEM_IMAGES:
             self.item_images[item] = pg.image.load(path.join(img_folder, ITEM_IMAGES[item])).convert_alpha()
+
 
         self.effects_sounds = {}
         for type in EFFECTS_SOUNDS:
@@ -165,9 +167,12 @@ class Game:
                 Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name in ['health']:
                 Item(self, obj_center, tile_object.name)
+            if tile_object.name in ['ammo']:
+                Item(self, obj_center, tile_object.name)
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
         self.paused = False
+        self.mobs_left = len(self.mobs)
         #self.effects_sounds['level_start'].play()
 
     def run(self):
@@ -197,7 +202,12 @@ class Game:
                 hit.kill()
                 self.effects_sounds['health_up'].play()
                 self.player.add_health(HEALTH_PACK_AMOUNT)
-        print(len(self.mobs))
+            if hit.type == 'ammo' and self.player.remaining_magazines < MAX_GUN_MAGS:
+                self.player.add_ammo(MAX_GUN_MAGS)
+                hit.kill()
+        #print(self.mobs_left)
+        #print(len(self.mobs))
+        #print(self.player.pos)
 
         # mobs hit player
         hits = pg.sprite.spritecollide(self.player, self.mobs, False, collide_hit_rect)
@@ -222,6 +232,7 @@ class Game:
         
         if self.player.rect.left > self.map_rect.right-TILESIZE and len(self.mobs) == 0:
             self.playing = False
+        
     
     #draws the grid (not in use currently)
     def draw_grid(self):
@@ -236,7 +247,7 @@ class Game:
     
      # draws everything including the final 'pg.display.flip()' command
     def draw(self):
-        pg.display.set_caption('{:.2f}'.format(self.clock.get_fps()))
+        pg.display.set_caption('fps: '+'{:.2f}'.format(self.clock.get_fps())+' -- Zombies Remaning: '+str(len(self.mobs))+' - Ammo : '+str(self.player.remaining_ammo)+' - Clips : '+str(self.player.remaining_magazines))
         #self.screen.fill(BGCOLOR)
         self.screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
 
@@ -260,6 +271,9 @@ class Game:
         if self.paused:
             self.screen.blit(self.dim_screen,(0, 0))
             self.draw_text("Paused", self.title_font, 105, RED, WIDTH / 2, HEIGHT / 2, align="center")
+
+        #self.draw_text(str(self.mobs_left), self.title_font, 105, BLACK, WIDTH/2, HEIGHT/2, align="sw")
+
         pg.display.flip()
 
     def events(self):
