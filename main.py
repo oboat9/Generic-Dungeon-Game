@@ -322,6 +322,6 @@ def RunGame():
             levelnum = 1
 
 g = Game()
-current_Level = 'level3.tmx'
+current_Level = 'level1.tmx'
 levelnum = 1
 g.show_start_screen()
