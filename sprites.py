@@ -1,6 +1,6 @@
 import pygame as pg
 import pytmx
-from random import uniform, choice
+from random import uniform, choice, randint
 
 from settings import *
 from tilemap import *
@@ -33,6 +33,7 @@ def collide_with_walls(sprite, group, dir):
 
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
+        self._layer = PLAYER_LAYER
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
@@ -64,8 +65,6 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_DOWN] or keys[pg.K_s]:
             self.vel = vec(-PLAYER_SPEED / 2, 0).rotate(-self.rot)
 
-
-
          # shooting bullets
         if keys[pg.K_SPACE]:
             now = pg.time.get_ticks()
@@ -77,6 +76,7 @@ class Player(pg.sprite.Sprite):
 
                  # kicks the player back when shooting
                 self.vel = vec(-KICKBACK, 0).rotate(-self.rot)
+                MuzzleFlash(self.game, pos)
 
 
     def update(self):
@@ -100,6 +100,7 @@ class Player(pg.sprite.Sprite):
 
 class Bullet(pg.sprite.Sprite):
     def __init__(self, game, pos, dir):
+        self._layer = BULLET_LAYER
         self.groups = game.all_sprites, game.bullets
         pg.sprite.Sprite.__init__(self, self.groups)
 
@@ -127,6 +128,7 @@ class Bullet(pg.sprite.Sprite):
 
 class Mob(pg.sprite.Sprite):
     def __init__(self, game, x, y):
+        self._layer = MOB_LAYER
         self.groups = game.all_sprites, game.mobs
         pg.sprite.Sprite.__init__(self, self.groups)
 
@@ -202,9 +204,9 @@ class Mob(pg.sprite.Sprite):
         if self.health < 100:
             pg.draw.rect(self.image, col, self.health_bar)  
         
-
 class Wall(pg.sprite.Sprite):
     def __init__(self, game, x, y):
+        self._layer = WALL_LAYER
         self.groups = game.all_sprites, game.walls
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game
@@ -235,3 +237,20 @@ class Obstacle(pg.sprite.Sprite):
             # makes sure the walls are the same size as the [TILESIZE]
         self.rect.x = x
         self.rect.y = y
+
+class MuzzleFlash(pg.sprite.Sprite):
+    def __init__(self, game, pos):
+        self._layer = EFFECTS_LAYER
+        self.groups = game.all_sprites
+        pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        size = randint(20, 50)
+        self.image = pg.transform.scale(choice(game.gun_flashes),(size, size))
+        self.rect = self.image.get_rect()
+        self.pos = pos
+        self.rect.center = pos
+        self.spawn_time = pg.time.get_ticks()
+
+    def update(self):
+        if pg.time.get_ticks() - self.spawn_time > FLASH_DURATION:
+            self.kill()
