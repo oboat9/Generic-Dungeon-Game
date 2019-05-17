@@ -68,6 +68,8 @@ class Player(pg.sprite.Sprite):
             self.vel = vec(PLAYER_SPEED, 0).rotate(-self.rot)
         if keys[pg.K_DOWN] or keys[pg.K_s]:
             self.vel = vec(-PLAYER_SPEED / 2, 0).rotate(-self.rot)
+        
+        # reloading
         if keys[pg.K_r]:
             now = pg.time.get_ticks()
             if now - self.reload_timer > RELOAD_TIME and self.remaining_magazines > 0:
@@ -79,20 +81,23 @@ class Player(pg.sprite.Sprite):
                 self.game.no_ammo_reload.play()
         
 
-         # shooting bullets
-        if keys[pg.K_SPACE] and self.remaining_ammo > 0:
-            now = pg.time.get_ticks()
-            if now - self.last_shot > BULLET_RATE:
-                self.last_shot = now
-                dir = vec(1, 0).rotate(-self.rot)
-                pos = self.pos + BARREL_OFFSET.rotate(-self.rot)
-                Bullet(self.game, pos, dir)
-                self.remaining_ammo -= 1
+         # shooting
+        if keys[pg.K_SPACE]:
+            if self.remaining_ammo > 0:
+                now = pg.time.get_ticks()
+                if now - self.last_shot > BULLET_RATE:
+                    self.last_shot = now
+                    dir = vec(1, 0).rotate(-self.rot)
+                    pos = self.pos + BARREL_OFFSET.rotate(-self.rot)
+                    Bullet(self.game, pos, dir)
+                    self.remaining_ammo -= 1
 
-                 # kicks the player back when shooting
-                self.vel = vec(-KICKBACK, 0).rotate(-self.rot)
-                choice(self.game.weapon_sounds['gun']).play()
-                MuzzleFlash(self.game, pos)
+                    # kicks the player back when shooting
+                    self.vel = vec(-KICKBACK, 0).rotate(-self.rot)
+                    choice(self.game.weapon_sounds['gun']).play()
+                    MuzzleFlash(self.game, pos)
+            elif self.remaining_ammo <= 0:
+                self.game.empty_mag.play()
 
 
     def update(self):

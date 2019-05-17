@@ -109,6 +109,7 @@ class Game:
         self.zombie_die_snd = pg.mixer.Sound(path.join(snd_Folder,'ZombieDying.wav'))
         self.gun_reload_snd = pg.mixer.Sound(path.join(snd_Folder,'gun reload.wav'))
         self.no_ammo_reload = pg.mixer.Sound(path.join(snd_Folder,'no more reload.wav'))
+        self.empty_mag = pg.mixer.Sound(path.join(snd_Folder,'no ammo.wav'))
         self.item_images = {}
         for item in ITEM_IMAGES:
             self.item_images[item] = pg.image.load(path.join(img_folder, ITEM_IMAGES[item])).convert_alpha()
@@ -204,6 +205,7 @@ class Game:
                 self.player.add_health(HEALTH_PACK_AMOUNT)
             if hit.type == 'ammo' and self.player.remaining_magazines < MAX_GUN_MAGS:
                 self.player.add_ammo(MAX_GUN_MAGS)
+                self.effects_sounds['ammo_pickup'].play()
                 hit.kill()
         #print(self.mobs_left)
         #print(len(self.mobs))
@@ -320,6 +322,6 @@ def RunGame():
             levelnum = 1
 
 g = Game()
-current_Level = 'level1.tmx'
+current_Level = 'level3.tmx'
 levelnum = 1
 g.show_start_screen()

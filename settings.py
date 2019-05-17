@@ -87,4 +87,4 @@ BOB_SPEED = 0.2
 PLAYER_HIT_SOUNDS = ['playerhit.wav']
 ZOMBIE_HIT_SOUNDS = ['splat-15.wav']
 WEAPON_SOUNDS_GUN = ['sfx_weapon_singleshot2.wav']
-EFFECTS_SOUNDS = {'health_up': 'health_pack.wav'}
+EFFECTS_SOUNDS = {'health_up': 'health_pack.wav','ammo_pickup': 'ammo-pickup.wav'}
