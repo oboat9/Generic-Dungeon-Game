@@ -139,7 +139,7 @@ class Mob(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self, self.groups)
 
         self.game = game
-        self.image = game.mob_img
+        self.image = game.mob_img.copy()
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
@@ -155,6 +155,7 @@ class Mob(pg.sprite.Sprite):
         self.rot = 0
         self.health = MOB_HEALTH
         self.speed = choice(MOB_SPEEDS)
+        self.target = game.player
 
     def avoid_mobs(self):
         for mob in self.game.mobs:
@@ -164,33 +165,36 @@ class Mob(pg.sprite.Sprite):
                     self.acc += dist.normalize()
 
     def update(self):
-            # rotates the mob
-        self.rot = (self.game.player.pos - self.pos).angle_to(vec(1,0))
-        self.image = pg.transform.rotate(self.game.mob_img, self.rot)
+        target_dist = self.target.pos - self.pos
+        if target_dist.length_squared() < DETECT_RADIUS**2:
+                
+                # rotates the mob
+            self.rot = target_dist.angle_to(vec(1,0))
+            self.image = pg.transform.rotate(self.game.mob_img, self.rot)
 
-            # gets the new rect after rotating
-        self.rect = self.image.get_rect()
-        self.rect.center = self.pos
+                # gets the new rect after rotating
+            self.rect = self.image.get_rect()
+            self.rect.center = self.pos
 
-            # makes the mob chase the player
-        self.acc = vec(1, 0).rotate(-self.rot)
-        self.avoid_mobs()
-        self.acc.scale_to_length(self.speed)
-            # updates mob location to match the new rotation/location
+                # makes the mob chase the player
+            self.acc = vec(1, 0).rotate(-self.rot)
+            self.avoid_mobs()
+            self.acc.scale_to_length(self.speed)
+                # updates mob location to match the new rotation/location
 
-        self.acc += self.vel * -1
-        self.vel += self.acc * self.game.dt
-        self.pos += self.vel * self.game.dt + 0.5 * self.acc * self.game.dt ** 2
-            # updates hitbox to match rectangle
-        self.hit_rect.centerx = self.pos.x
+            self.acc += self.vel * -1
+            self.vel += self.acc * self.game.dt
+            self.pos += self.vel * self.game.dt + 0.5 * self.acc * self.game.dt ** 2
+                # updates hitbox to match rectangle
+            self.hit_rect.centerx = self.pos.x
 
-            # horizontal collisions
-        collide_with_walls(self, self.game.walls, 'x')
-        self.hit_rect.centery = self.pos.y
-        
-            # vertical collisions
-        collide_with_walls(self, self.game.walls, 'y')
-        self.rect.center = self.hit_rect.center
+                # horizontal collisions
+            collide_with_walls(self, self.game.walls, 'x')
+            self.hit_rect.centery = self.pos.y
+            
+                # vertical collisions
+            collide_with_walls(self, self.game.walls, 'y')
+            self.rect.center = self.hit_rect.center
 
             # when health less than zero kill the mob
         if self.health <= 0:
