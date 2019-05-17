@@ -77,6 +77,7 @@ class Player(pg.sprite.Sprite):
 
                  # kicks the player back when shooting
                 self.vel = vec(-KICKBACK, 0).rotate(-self.rot)
+                choice(self.game.weapon_sounds['gun']).play()
                 MuzzleFlash(self.game, pos)
 
 
@@ -167,6 +168,9 @@ class Mob(pg.sprite.Sprite):
     def update(self):
         target_dist = self.target.pos - self.pos
         if target_dist.length_squared() < DETECT_RADIUS**2:
+
+            #if random() < 0.002:
+                #choice(self.game.zombie_moan_sounds).play()
                 
                 # rotates the mob
             self.rot = target_dist.angle_to(vec(1,0))
@@ -198,7 +202,10 @@ class Mob(pg.sprite.Sprite):
 
             # when health less than zero kill the mob
         if self.health <= 0:
+
+            #self.game.zombie_die_snd.play()
             self.kill()
+            self.game.map_img.blit(self.game.splat, self.pos - vec(32, 32))
     
     def draw_health(self):
         if self.health > 60:
@@ -274,6 +281,7 @@ class Item(pg.sprite.Sprite):
         self.game = game
         self.image = game.item_images[type]
         self.rect = self.image.get_rect()
+        self.hit_rect = self.rect
         self.type = type
         self.pos = pos
         self.rect.center = pos

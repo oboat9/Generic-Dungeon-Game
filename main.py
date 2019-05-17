@@ -14,8 +14,9 @@ import time
 from settings import *
 from sprites import *
 from tilemap import *
+import random
 
-current_Level = "level1.tmx"
+current_Level = 'level1.tmx'
 
 # HUD functions
 def draw_player_health(surf, x, y, pct):
@@ -48,13 +49,14 @@ class Game:
         
 
     # loads all the game files into pygame memory
-    def load_data(self, current_Level="level1.tmx"):
-        map_folder = "maps"
-        img_folder = "img"
-        snd_Folder = "snd"
+    def load_data(self, current_Level='level1.tmx'):
+        map_folder = 'maps'
+        img_folder = 'img'
+        snd_Folder = 'snd'
+        music_folder = 'music'
 
         self.current_Level = current_Level
-        self.map = TiledMap(path.join("maps", self.current_Level))
+        self.map = TiledMap(path.join('maps', self.current_Level))
 
         self.map_img = self.map.make_map()
         self.map_rect = self.map_img.get_rect()
@@ -64,21 +66,45 @@ class Game:
         self.mob_img = pg.image.load(path.join(img_folder, MOB_IMG)).convert_alpha()
         self.wall_img = pg.image.load(path.join(img_folder, WALL_IMG)).convert_alpha()
         self.wall_img = pg.transform.scale(self.wall_img, (TILESIZE,TILESIZE))
+        self.splat = pg.image.load(path.join(img_folder, SPLAT)).convert_alpha()
+        self.splat = pg.transform.scale(self.splat, (64,64))
         self.gun_flashes = []
         for img in MUZZLE_FLASHES:
             self.gun_flashes.append(pg.image.load(path.join(img_folder, img)).convert_alpha())
         
-        pg.mixer.music.load(path.join(snd_Folder,"mainmenu.wav"))
-        self.player_die_snd = pg.mixer.Sound(path.join(snd_Folder,"Player Dying.wav"))
+        pg.mixer.music.load(path.join(snd_Folder,'mainmenu.wav'))
+        self.player_die_snd = pg.mixer.Sound(path.join(snd_Folder,'Player Dying.wav'))
+        self.zombie_die_snd = pg.mixer.Sound(path.join(snd_Folder,'ZombieDying.wav'))
 
         self.item_images = {}
         for item in ITEM_IMAGES:
             self.item_images[item] = pg.image.load(path.join(img_folder, ITEM_IMAGES[item])).convert_alpha()
 
+        self.effects_sounds = {}
+        for type in EFFECTS_SOUNDS:
+            self.effects_sounds[type] = pg.mixer.Sound(path.join(snd_Folder, EFFECTS_SOUNDS[type]))
+
+        self.weapon_sounds = {}
+        self.weapon_sounds['gun'] = []
+        for snd in WEAPON_SOUNDS_GUN:
+            self.weapon_sounds['gun'].append(pg.mixer.Sound(path.join(snd_Folder,snd)))
+
+        #self.zombie_moan_sounds = []
+        #for snd in ZOMBIE_MOAN_SOUNDS:
+            #self.zombie_moan_sounds.append(pg.mixer.Sound(path.join(snd_Folder,snd)))
+            
+        self.player_hit_sounds = []
+        for snd in PLAYER_HIT_SOUNDS:
+            self.player_hit_sounds.append(pg.mixer.Sound(path.join(snd_Folder, snd)))
+
+        self.zombie_hit_sounds = []
+        for snd in ZOMBIE_HIT_SOUNDS:
+            self.zombie_hit_sounds.append(pg.mixer.Sound(path.join(snd_Folder, snd)))
+
     def new(self):
         
         # start the music
-        
+        pg.mixer.music.set_volume(0.2)
         pg.mixer.music.play(-1)
         
         # initialize all variables and do all the setup for a new game
@@ -99,16 +125,17 @@ class Game:
         
         for tile_object in self.map.tmxdata.objects:
             obj_center = vec(tile_object.x + tile_object.width / 2, tile_object.y + tile_object.height /2)
-            if tile_object.name == "player":
+            if tile_object.name == 'player':
                 self.player = Player(self, obj_center.x, obj_center.y)
-            if tile_object.name == "zombie":
+            if tile_object.name == 'zombie':
                 Mob(self, obj_center.x, obj_center.y)
-            if tile_object.name == "wall":
+            if tile_object.name == 'wall':
                 Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
             if tile_object.name in ['health']:
                 Item(self, obj_center, tile_object.name)
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
+        #self.effects_sounds['level_start'].play()
 
     def run(self):
         # game loop -- set self.playing = False to end the game
@@ -131,14 +158,19 @@ class Game:
         # player hits items
         hits = pg.sprite.spritecollide(self.player, self.items, False)
         for hit in hits:
+                # player hits healthpack
             if hit.type == 'health' and self.player.health < PLAYER_HEALTH:
                 hit.kill()
+                self.effects_sounds['health_up'].play()
                 self.player.add_health(HEALTH_PACK_AMOUNT)
         print(len(self.mobs))
 
         # mobs hit player
         hits = pg.sprite.spritecollide(self.player, self.mobs, False, collide_hit_rect)
         for hit in hits:
+                # makes the sound play whatever percentage of the hits you set it to
+            if random.random() < 1:
+                choice(self.player_hit_sounds).play()
             self.player.health -= MOB_DAMAGE
             hit.vel = vec(0, 0)
             if self.player.health <= 0:
@@ -168,9 +200,9 @@ class Game:
         for y in range(0, HEIGHT, TILESIZE):
             pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
     
-     # draws everything including the final "pg.display.flip()" command
+     # draws everything including the final 'pg.display.flip()' command
     def draw(self):
-        pg.display.set_caption("{:.2f}".format(self.clock.get_fps()))
+        pg.display.set_caption('{:.2f}'.format(self.clock.get_fps()))
         #self.screen.fill(BGCOLOR)
         self.screen.blit(self.map_img, self.camera.apply_rect(self.map_rect))
 
@@ -206,7 +238,7 @@ class Game:
                 
     # not used currently
     def show_start_screen(self):
-        self.current_Level = "level1.tmx"
+        self.current_Level = 'level1.tmx'
         RunGame()
     # not used currently
     def show_go_screen(self):
@@ -222,12 +254,12 @@ def RunGame():
         g.new()
         g.run()
         levelnum += 1
-        current_Level = "level" + str(levelnum) + ".tmx"
+        current_Level = 'level' + str(levelnum) + '.tmx'
 
         if levelnum > NUMBEROFLEVELS:
             levelnum = 1
 
 g = Game()
-current_Level = "level1.tmx"
+current_Level = 'level1.tmx'
 levelnum = 1
 g.show_start_screen()

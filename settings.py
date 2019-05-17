@@ -63,6 +63,8 @@ DETECT_RADIUS = 400
 MUZZLE_FLASHES = ['whitePuff15.png', 'whitePuff16.png', 'whitePuff17.png','whitePuff18.png']
 FLASH_DURATION = 40
 
+SPLAT = 'splat green.png'
+
 # Layers
 WALL_LAYER = 1
 PLAYER_LAYER = 2
@@ -78,3 +80,8 @@ HEALTH_PACK_AMOUNT = 20
 BOB_RANGE = 15
 BOB_SPEED = 0.2
 
+# Sounds
+PLAYER_HIT_SOUNDS = ['playerhit.wav']
+ZOMBIE_HIT_SOUNDS = ['splat-15.wav']
+WEAPON_SOUNDS_GUN = ['sfx_weapon_singleshot2.wav']
+EFFECTS_SOUNDS = {'health_up': 'health_pack.wav'}
