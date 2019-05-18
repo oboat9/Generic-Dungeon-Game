@@ -6,9 +6,10 @@ To start the game if you have python & pygame, run the *main.py* file.
 If you do not have python and or pygame, you open the *build.zip* and run *main.exe* 
 #### Important Note
  - In order to run this you **Must** have Python 3.7+ https://www.python.org/ and Pygame https://www.pygame.org/ installed.
+ - If you do not have both of these you can run the *main.exe* found in the *build.zip* folder
 
 ### Controls
- - Movement is either the arrow keys or WASD
+ - Movement is both the arrow keys or WASD
  - Shooting is Spacebar
 
 ## Project Criteria
