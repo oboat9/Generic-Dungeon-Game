@@ -9,7 +9,7 @@ If you do not have python and or pygame, you open the *build.zip* and run *main.
 
 ### Controls
  - Movement is either the arrow keys or WASD
- - Shooting is Left Mouse Click
+ - Shooting is Spacebar
 
 ## Project Criteria
  - 6 Levels
@@ -34,35 +34,25 @@ If you do not have python and or pygame, you open the *build.zip* and run *main.
 #### Design & *Planning*
 ###### Levels
  - [x] Design Level 1
- - [ ] Design Level 2 (Needs To Add Bonus)
+ - [X] Design Level 2 
  - [x] Design Level 3
- - [ ] Design Level 4 (Needs To Add Bonus)
- - [ ] Design Level 5 (Needs To Add Bonus)
+ - [x] Design Level 4 
+ - [x] Design Level 5 
  - [x] Design Level 6
  
-###### Sprites
- - [ ] Design Character
- - [ ] Design Regular Enemy
- - [ ] Design Enemy With Projectile
- - [ ] Design Mid-Boss
- - [ ] Design Final-Boss
- - [ ] Design "Key"
- 
+###### Sprites 
+ - (all sprites have been obtained through https://opengameart.org/ )
 ###### Sound
- - [ ] Design Sound Effects *(In Progress)*
+ - [x] 
  ####### Music
- - [x] Design Menu Music
- - [ ] Design Game Music
+ - [x] Design Game Music
  
 #### Programming
 ###### Game Fundamentals
  - [x] Basic Movement
  - [x] Obstacles For Player
  - [x] Scrolling Camera
-###### Game Look
- - [ ] Player Sprite & Animation *(In Progress)*
- - [ ] Enemy Sprite & Animation *(In Progress)*
 ###### Game Mechanics
  - [x] Impliment Enemies
- - [ ] Impliment Weapons *(In Progress)*
- - [ ] Impliment Level Finish (Start next level when done last one)
+ - [x] Impliment Weapons
+ - [x] Impliment Level Finish (Start next level when done last one)
