@@ -14,7 +14,6 @@ If you do not have python and or pygame, you open the *build.zip* and run *main.
 ## Project Criteria
  - 6 Levels
  - Key and exit for each level
- - Original Sprites
 
  ## Game Description
  This is a game that should just be a fairly generic dungeon escape game.
