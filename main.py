@@ -212,7 +212,7 @@ class Game:
         #print(len(self.mobs))
         #print(self.player.pos)
 
-        # mobs hit player
+        # when the player gets hit
         hits = pg.sprite.spritecollide(self.player, self.mobs, False, collide_hit_rect)
         for hit in hits:
                 # makes the sound play whatever percentage of the hits you set it to
@@ -226,7 +226,9 @@ class Game:
                 pg.mixer.music.stop()
                 time.sleep(1)
                 RunGame()
+            
         if hits:
+            self.player.hit()
             self.player.pos += vec(MOB_KNOCKBACK, 0).rotate(-hits[0].rot)
 
         # bullets hit mobs

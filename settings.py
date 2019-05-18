@@ -68,6 +68,8 @@ FLASH_DURATION = 40
 
 SPLAT = 'splat green.png'
 
+DAMAGE_ALPHA = [i for i in range(0,255,25)]
+
 # Layers
 WALL_LAYER = 1
 PLAYER_LAYER = 2

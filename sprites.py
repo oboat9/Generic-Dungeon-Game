@@ -2,6 +2,7 @@ import pygame as pg
 import pytmx
 from random import uniform, choice, randint
 
+from itertools import chain
 from settings import *
 from tilemap import *
 import pytweening as tween
@@ -102,12 +103,24 @@ class Player(pg.sprite.Sprite):
                 self.game.empty_mag.play()
 
 
+    def hit(self):
+        self.damaged = True
+        self.damage_alpha = chain(DAMAGE_ALPHA * 1)
+
     def update(self):
             # gets key updates
         self.get_keys()
             # rotates the player when the turning keys are pressed
         self.rot = (self.rot + self.rot_speed * self.game.dt) % 360
         self.image = pg.transform.rotate(self.game.player_image, self.rot)
+        if self.damaged:
+            #dmg_image = self.image.copy()
+            try:
+                self.image.fill((255,0,0, next(self.damage_alpha)), special_flags=pg.BLEND_RGBA_MULT)
+            except:
+                self.damaged = False
+
+
             # updates the rectangle after turning
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
