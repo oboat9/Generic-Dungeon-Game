@@ -18,4 +18,5 @@ If you do not have python and or pygame, you open the *build.zip* and run *main.
 
  ## Game Description
  This is a game that should just be a fairly generic dungeon escape game.
- There will be a key and an exit for each level, of which there will be at least six.
+ There will be a key and an exit for each level.
+ The last zombie in the level will drop the key when killed, after you pick up the key you can progress to the next level.
