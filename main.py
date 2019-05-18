@@ -34,7 +34,7 @@ def draw_player_health(surf, x, y, pct):
     else:
         col = RED
     pg.draw.rect(surf, col, fill_rect)
-    pg.draw.rect(surf, WHITE, outline_rect, 2)
+    pg.draw.rect(surf, BLACK, outline_rect, 2)
 
 class Game:
     # runs first
@@ -139,7 +139,7 @@ class Game:
     def new(self):
         
         # start the music
-        pg.mixer.music.set_volume(0.2)
+        pg.mixer.music.set_volume(0.75)
         pg.mixer.music.play(-1)
         
         # initialize all variables and do all the setup for a new game
@@ -234,6 +234,8 @@ class Game:
         
         if self.player.rect.left > self.map_rect.right-TILESIZE and len(self.mobs) == 0:
             self.playing = False
+        if self.player.rect.left > self.map_rect.right-(TILESIZE*7) and self.player.rect.top > self.map_rect.bottom-(TILESIZE*7) and len(self.mobs) == 0:
+            self.playing = False
         
     
     #draws the grid (not in use currently)
@@ -319,9 +321,9 @@ def RunGame():
         current_Level = 'level' + str(levelnum) + '.tmx'
 
         if levelnum > NUMBEROFLEVELS:
-            levelnum = 1
+            levelnum = 0
 
 g = Game()
-current_Level = 'level1.tmx'
+current_Level = 'level6.tmx'
 levelnum = 1
 g.show_start_screen()

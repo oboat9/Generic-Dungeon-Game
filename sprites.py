@@ -52,6 +52,7 @@ class Player(pg.sprite.Sprite):
         self.health = PLAYER_HEALTH
         self.remaining_ammo = GUN_AMMO
         self.remaining_magazines = MAX_GUN_MAGS
+        self.reload_now = 0
 
      # gets the keypresses every tick
     def get_keys(self):
@@ -71,9 +72,9 @@ class Player(pg.sprite.Sprite):
         
         # reloading
         if keys[pg.K_r]:
-            now = pg.time.get_ticks()
-            if now - self.reload_timer > RELOAD_TIME and self.remaining_magazines > 0:
-                self.reload_timer = now
+            self.reload_now = pg.time.get_ticks()
+            if self.reload_now - self.reload_timer > RELOAD_TIME and self.remaining_magazines > 0:
+                self.reload_timer = self.reload_now
                 self.game.gun_reload_snd.play()
                 self.remaining_magazines -= 1
                 self.remaining_ammo = GUN_AMMO
@@ -85,7 +86,7 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_SPACE]:
             if self.remaining_ammo > 0:
                 now = pg.time.get_ticks()
-                if now - self.last_shot > BULLET_RATE:
+                if now - self.last_shot > BULLET_RATE and now - self.reload_now > RELOAD_TIME:
                     self.last_shot = now
                     dir = vec(1, 0).rotate(-self.rot)
                     pos = self.pos + BARREL_OFFSET.rotate(-self.rot)
