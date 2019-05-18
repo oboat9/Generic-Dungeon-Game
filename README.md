@@ -35,7 +35,7 @@ If you do not have python and or pygame, you open the *build.zip* and run *main.
  - (all sprites have been obtained through https://opengameart.org/ )
 ###### Sound
  - [x] 
- ####### Music
+ ###### Music
  - [x] Design Game Music
  
 #### Programming
