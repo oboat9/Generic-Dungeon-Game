@@ -243,7 +243,6 @@ class Mob(pg.sprite.Sprite):
 
             # when health less than zero kill the mob
         if self.health <= 0:
-
             #self.game.zombie_die_snd.play()
             self.kill()
             self.game.map_img.blit(self.game.splat, self.pos - vec(32, 32))

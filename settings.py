@@ -79,7 +79,7 @@ EFFECTS_LAYER = 4
 ITEMS_LAYER = 1
 
 # Items
-ITEM_IMAGES = {'health': 'health_pack.png', 'ammo': 'ammo.png'}
+ITEM_IMAGES = {'health': 'health_pack.png', 'ammo': 'ammo.png', 'key':'Key.png'}
 
 HEALTH_PACK_AMOUNT = 20
 BOB_RANGE = 15
@@ -89,4 +89,4 @@ BOB_SPEED = 0.3
 PLAYER_HIT_SOUNDS = ['playerhit.wav']
 ZOMBIE_HIT_SOUNDS = ['splat-15.wav']
 WEAPON_SOUNDS_GUN = ['sfx_weapon_singleshot2.wav']
-EFFECTS_SOUNDS = {'health_up': 'health_pack.wav','ammo_pickup': 'ammo-pickup.wav'}
+EFFECTS_SOUNDS = {'health_up': 'health_pack.wav','ammo_pickup': 'ammo-pickup.wav', 'key_pickup':'Key.wav'}

@@ -81,6 +81,7 @@ class Game:
         music_folder = 'music'
         
         self.title_font = path.join(img_folder, 'ZOMBIE.TTF')
+        self.hud_font = path.join(img_folder, 'Impacted2.0.ttf')
 
         self.dim_screen = pg.Surface(self.screen.get_size()).convert_alpha()
         self.dim_screen.fill((0, 0, 0, 180))
@@ -111,6 +112,7 @@ class Game:
         self.gun_reload_snd = pg.mixer.Sound(path.join(snd_Folder,'gun reload.wav'))
         self.no_ammo_reload = pg.mixer.Sound(path.join(snd_Folder,'no more reload.wav'))
         self.empty_mag = pg.mixer.Sound(path.join(snd_Folder,'no ammo.wav'))
+        self.level_end_snd = pg.mixer.Sound(path.join(snd_Folder,'Level Finish.wav'))
         self.item_images = {}
         for item in ITEM_IMAGES:
             self.item_images[item] = pg.image.load(path.join(img_folder, ITEM_IMAGES[item])).convert_alpha()
@@ -171,10 +173,15 @@ class Game:
                 Item(self, obj_center, tile_object.name)
             if tile_object.name in ['ammo']:
                 Item(self, obj_center, tile_object.name)
+            #if tile_object.name in ['key']:
+                #print(tile_object.name)
+                #Item(self, obj_center, tile_object.name)
+                
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
         self.paused = False
         self.mobs_left = len(self.mobs)
+        self.can_progress = False
         #self.effects_sounds['level_start'].play()
 
     def run(self):
@@ -193,6 +200,7 @@ class Game:
         exit(0)
 
     def update(self):
+        #print(self.can_progress)
         # update portion of the game loop
         self.all_sprites.update()
         self.camera.update(self.player)
@@ -207,6 +215,10 @@ class Game:
             if hit.type == 'ammo' and self.player.remaining_magazines < MAX_GUN_MAGS:
                 self.player.add_ammo(MAX_GUN_MAGS)
                 self.effects_sounds['ammo_pickup'].play()
+                hit.kill()
+            if hit.type == 'key':
+                self.can_progress = True
+                self.effects_sounds['key_pickup'].play()
                 hit.kill()
         #print(self.mobs_left)
         #print(len(self.mobs))
@@ -236,24 +248,14 @@ class Game:
         for hit in hits:
             hit.health -= BULLET_DAMAGE
             hit.vel = vec(0,0)
+            if hit.health <= 0 and len(self.mobs) <= 1:
+                Item(self, hit.pos, 'key')
         
-        if self.player.rect.left > self.map_rect.right-TILESIZE and len(self.mobs) == 0:
+        if self.player.rect.left > self.map_rect.right-TILESIZE and self.can_progress:
             self.playing = False
-        if self.player.rect.left > self.map_rect.right-(TILESIZE*7) and self.player.rect.top > self.map_rect.bottom-(TILESIZE*7) and len(self.mobs) == 0:
+        if self.player.rect.left > self.map_rect.right-(TILESIZE*7) and self.player.rect.top > self.map_rect.bottom-(TILESIZE*7) and self.can_progress and self.current_Level == 'level6.tmx':
             self.playing = False
         
-    
-    #draws the grid (not in use currently)
-    def draw_grid(self):
-
-        # vertical lines
-        for x in range(0, WIDTH, TILESIZE):
-            pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
-        
-         # horizontal lines
-        for y in range(0, HEIGHT, TILESIZE):
-            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
-    
      # draws everything including the final 'pg.display.flip()' command
     def draw(self):
         pg.display.set_caption('fps: '+'{:.2f}'.format(self.clock.get_fps())+' -- Zombies Remaning: '+str(len(self.mobs))+' - Ammo : '+str(self.player.remaining_ammo)+' - Clips : '+str(self.player.remaining_magazines))
@@ -277,6 +279,7 @@ class Game:
         
         # HUD functions
         draw_player_health(self.screen, 10, 10, self.player.health / PLAYER_HEALTH)
+        #self.draw_text('Zombies: {}'.format(len(self.mobs)), self.hud_font, 30, WHITE,WIDTH - 10, 10, align="ne")
         if self.paused:
             self.screen.blit(self.dim_screen,(0, 0))
             self.draw_text("Paused", self.title_font, 105, RED, WIDTH / 2, HEIGHT / 2, align="center")
@@ -309,10 +312,29 @@ class Game:
     def show_start_screen(self):
         self.current_Level = 'level1.tmx'
         RunGame()
+
     # not used currently
     def show_go_screen(self):
         pg.mixer.music.stop()
+        self.level_end_snd.play()
+        self.screen.fill(BLACK)
+        self.draw_text("You Win", self.hud_font, 100, GREEN, WIDTH / 2, HEIGHT/2-50, align="center")
+        self.draw_text("Press a key to close", self.hud_font, 75, WHITE,WIDTH / 2, HEIGHT /2+50, align="center")
+        pg.display.flip()
+        self.wait_for_key()
 
+    def wait_for_key(self):
+        pg.event.wait()
+        waiting = True
+        while waiting:
+            self.clock.tick(FPS)
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    waiting = False
+                    self.quit()
+                if event.type == pg.KEYUP:
+                    waiting = False
+                    self.quit()
 
 # create the game object
 def RunGame():
@@ -324,11 +346,14 @@ def RunGame():
         g.run()
         levelnum += 1
         current_Level = 'level' + str(levelnum) + '.tmx'
+        print(current_Level)
 
-        if levelnum > NUMBEROFLEVELS:
-            levelnum = 0
+        if current_Level == 'level7.tmx':
+            g.show_go_screen()
+        #if levelnum > NUMBEROFLEVELS:
+            #levelnum = 0
 
 g = Game()
-current_Level = 'level1.tmx'
+#current_Level = 'level6.tmx'
 levelnum = 1
 g.show_start_screen()
