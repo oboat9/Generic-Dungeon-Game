@@ -39,6 +39,7 @@ def draw_player_health(surf, x, y, pct):
 class Game:
     # runs first
     def __init__(self):
+        #pg.mixer.pre_init(44100, -16, 1, 4069)
         pg.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
