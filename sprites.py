@@ -53,6 +53,7 @@ class Player(pg.sprite.Sprite):
         self.remaining_ammo = GUN_AMMO
         self.remaining_magazines = MAX_GUN_MAGS
         self.reload_now = 0
+        self.damaged = False
 
      # gets the keypresses every tick
     def get_keys(self):

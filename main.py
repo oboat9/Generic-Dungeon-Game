@@ -223,6 +223,8 @@ class Game:
             if self.player.health <= 0:
                 channel=self.player_die_snd.play()
                 self.playing = False
+                pg.mixer.music.stop()
+                time.sleep(1)
                 RunGame()
         if hits:
             self.player.pos += vec(MOB_KNOCKBACK, 0).rotate(-hits[0].rot)
@@ -325,6 +327,6 @@ def RunGame():
             levelnum = 0
 
 g = Game()
-current_Level = 'level6.tmx'
+current_Level = 'level1.tmx'
 levelnum = 1
 g.show_start_screen()
