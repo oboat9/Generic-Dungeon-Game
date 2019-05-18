@@ -19,15 +19,6 @@ If you do not have python and or pygame, you open the *build.zip* and run *main.
  ## Game Description
  This is a game that should just be a fairly generic dungeon escape game.
  There will be a key and an exit for each level, of which there will be at least six.
- 
- ## Features
- - Original Level Design
- - Original Sound Design
- - Original Sprites
- - Enemies
- - Projectiles / Weapons
- ### Planned Features (Deadline Dependant)
-  - *Basic Lighting System (Black shadow around a certain radius of the player to increase difficulty) (Not on boss levels)*
 	
 	
 ## Tasks
