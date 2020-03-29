@@ -1,7 +1,7 @@
 # Generic Dungeon Game
 A Generic Dungeon Game Made For Computer Science 10
 
-###Instructions
+### Instructions
 To start the game if you have python & pygame, run the *main.py* file.
 If you do not have python and or pygame, you open the *build.zip* and run *main.exe* 
 #### Important Note
