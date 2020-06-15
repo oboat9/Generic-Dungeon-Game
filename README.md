@@ -1,22 +1,22 @@
 # Generic Dungeon Game
-A Generic Dungeon Game Made For Computer Science 10
 
-### Instructions
-To start the game if you have python & pygame, run the *main.py* file.
-If you do not have python and or pygame, you open the *build.zip* and run *main.exe* 
-#### Important Note
- - In order to run this you **Must** have Python 3.7+ https://www.python.org/ and Pygame https://www.pygame.org/ installed.
- - If you do not have both of these you can run the *main.exe* found in the *build.zip* folder
+A Generic Dungeon Game Made For Computer Science At Grade 10 Level
+
+## Instructions
+
+### Running The Application
+
+- Either have python 3.7+ (sometimes broken) or run the build in build.zip
+
+### Playing
+
+- Shoot the zombies to kill them, or they will kill you first
+- Keep track of your ammo & health using the titlebar of the window (I didn't want to bother rendering text)
+- There will be a key and an exit for each level.
+- The last zombie in the level will drop a key when killed, after you pick up the key you can progress to the next level.
 
 ### Controls
- - Movement is both the arrow keys or WASD
- - Shooting is Spacebar
 
-## Project Criteria
- - 6 Levels
- - Key and exit for each level
-
- ## Game Description
- This is a game that should just be a fairly generic dungeon escape game.
- There will be a key and an exit for each level.
- The last zombie in the level will drop the key when killed, after you pick up the key you can progress to the next level.
+- Movement is arrow keys or WASD
+- Shoot is SPACE
+- Reload is the 'r' key
